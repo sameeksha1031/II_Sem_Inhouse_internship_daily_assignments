@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Records</title>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+<div class="container py-5">
+
+    <h1 class="text-center mb-4">Employee Records</h1>
+
+    <input
+        type="text"
+        id="search"
+        class="form-control mb-4"
+        placeholder="Search Employee">
+
+    <div id="container" class="row g-4"></div>
+
+</div>
+
+<script>
+
+fetch("https://jsonplaceholder.typicode.com/users")
+.then(res => {
+   if(!res.ok){
+    throw new Error("Failed to Fetch Data");
+}
+return res.json();
+}
+)
+.then(users => {
+
+    let html = "";
+
+    users.forEach(user => {
+
+        html += `
+        <div class="col-md-4 card-item">
+
+            <div class="card shadow">
+
+                <div class="card-body text-center">
+
+                    <img
+                        src="https://i.pravatar.cc/150?img=${user.id}"
+                        class="rounded-circle mb-3"
+                        width="120"
+                        height="120">
+
+                    <h4>${user.name}</h4>
+
+                    <button class="btn btn-primary btn-sm mt-2 showBtn">
+                        Show Details
+                    </button>
+
+                    <div class="details mt-3 text-start" style="display:none;">
+
+                        <p><strong>Username:</strong> ${user.username}</p>
+
+                        <p><strong>Email:</strong> ${user.email}</p>
+
+                        <p><strong>Phone:</strong> ${user.phone}</p>
+
+                        <p><strong>Website:</strong> ${user.website}</p>
+
+                        <p><strong>Company:</strong> ${user.company.name}</p>
+
+                        <p><strong>City:</strong> ${user.address.city}</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        `;
+
+    });
+
+    $("#container").html(html);
+
+});
+
+
+// Show / Hide Details
+$(document).on("click", ".showBtn", function () {
+
+    $(this).next(".details").slideToggle();
+
+});
+
+
+// Search
+$("#search").keyup(function () {
+
+    let val = $(this).val().toLowerCase();
+
+    $(".card-item").each(function () {
+
+        let name = $(this).find("h4").text().toLowerCase();
+
+        if (name.includes(val)) {
+            $(this).show();
+        }
+        else {
+            $(this).hide();
+        }
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+.black{
+    background-color: black;
+}
+.nav-link:hover{
+    color: rgb(206, 62, 62);
+}
+.nav-link{
+    color: white;
+}
+body{
+    background: black;
+    width: 100%;
+}
+.team{
+    margin-left: 150px;
+    cursor: pointer;
+}
+.profile-img{
+    margin-top:100px;
+}

@@ -1,0 +1,217 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image counter</title>
+    <style>
+        body{
+            position: relative;
+            margin: 0;
+        }
+        .images{
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+        }
+        .img1{
+            padding: 10px;
+            border: 2px solid black;
+            border-radius: 10px;
+        }
+        .img2{
+            padding: 10px;
+            border: 2px solid black;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="images">
+        <div class="img1">
+            <img onclick="onclick()" height="200px" width="200px" src="aple.jpg" alt="apple image">
+            <div class="result1"></div>
+        </div>
+
+        <div class="img2">
+            <img onclick="onclick()" src="banana.jpg" alt="">
+
+            <div class="result2"></div>
+        </div>
+
+    </div>
+
+
+
+    <script>
+        let apple = 0;
+        let banana = 0;
+        document.querySelectorAll("img").forEach(img =>{
+            img.style.left = Math.random()*(window.innerWidth-100) + "px"
+            img.style.top = Math.random()*(window.innerHeight-120) + "px"
+        })
+
+        function onclick(type, img){
+            if(type == "apple"){
+                document.getElementsByName("result1").innerText = ++apple
+            }
+            else{
+                document.getElementsByName("result2").innerText = ++banana
+
+            }
+            img.style.left = Math.random()*(window.innerWidth-100)+"px"
+            img.style.left = Math.random()*(window.innerHeight-120)+"px"
+
+
+        }
+    </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apple Banana Click Game</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="scoreBoard">
+
+    <h2>⏳ Time Left :
+        <span id="timer">60</span> sec
+    </h2>
+
+    <h2>🍎 Apple :
+        <span id="appleScore">0</span>
+    </h2>
+
+    <h2>🍌 Banana :
+        <span id="bananaScore">0</span>
+    </h2>
+
+    <h2>Total :
+        <span id="totalScore">0</span>
+    </h2>
+
+</div>
+
+
+<img src="apple.jpg.jpeg" id="apple" onclick="clickImage('apple',this)">
+
+<img src="banana.jpg.jpeg" id="banana" onclick="clickImage('banana',this)">
+
+
+
+<div id="gameOver">
+
+    <h1>🎮 Game Over</h1>
+
+    <h2 id="result"></h2>
+
+    <button onclick="location.reload()">
+        Restart Game
+    </button>
+
+</div>
+
+
+
+<script>
+
+let apple = 0;
+let banana = 0;
+let time = 60;
+let gameRunning = true;
+
+
+// Random Position Function
+function randomPosition(img){
+
+    let x = Math.random()*(window.innerWidth-170);
+
+    let y = Math.random()*(window.innerHeight-220);
+
+    img.style.left = x + "px";
+    img.style.top = y + "px";
+
+}
+
+
+// Initial Position
+randomPosition(document.getElementById("apple"));
+randomPosition(document.getElementById("banana"));
+
+
+
+
+// Timer
+
+let timer = setInterval(function(){
+
+    time--;
+
+    document.getElementById("timer").innerText = time;
+
+    if(time==0){
+
+        clearInterval(timer);
+
+        gameRunning = false;
+
+        document.getElementById("apple").style.display="none";
+        document.getElementById("banana").style.display="none";
+
+        document.getElementById("gameOver").style.display="block";
+
+        document.getElementById("result").innerHTML =
+        "Apple Score : " + apple +
+        "<br><br>" +
+        "Banana Score : " + banana +
+        "<br><br>" +
+        "Total Score : " + (apple+banana);
+
+    }
+
+},1000);
+
+
+
+
+// Click Function
+
+function clickImage(type,img){
+
+    if(!gameRunning)
+        return;
+
+    if(type=="apple"){
+
+        apple++;
+
+        document.getElementById("appleScore").innerText = apple;
+
+    }
+
+    else{
+
+        banana++;
+
+        document.getElementById("bananaScore").innerText = banana;
+
+    }
+
+    document.getElementById("totalScore").innerText = apple + banana;
+
+    randomPosition(img);
+
+}
+
+</script>
+
+</body>
+</html>

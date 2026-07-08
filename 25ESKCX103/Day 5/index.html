@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pravah 2026 | Fest Registration</title>
+  <style>
+    :root {
+      --bg: #fff7ef;
+      --panel: #ffffff;
+      --card: #fff3e6;
+      --text: #2f1f12;
+      --muted: #7a5b3d;
+      --accent: #ff7a00;
+      --accent-2: #ff9f43;
+      --border: rgba(255,122,0,0.18);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background:
+        linear-gradient(rgba(255,122,0,0.2), rgba(255,247,239,0.82)),
+        url('https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat fixed;
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(1200px, 92vw);
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 24px 0 8px;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255,255,255,0.95);
+      padding: 14px 18px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      backdrop-filter: blur(8px);
+      position: sticky;
+    }
+
+    .brand { font-weight: 800; letter-spacing: 1px; }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 24px;
+      padding: 36px 0 24px;
+      align-items: center;
+    }
+
+    .hero-card, .panel, .stats-card {
+      background: rgba(255,255,255,0.95);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: 0 16px 40px rgba(255,122,0,0.12);
+    }
+
+    .hero-card {
+      padding: 32px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      background: rgba(255,122,0,0.12);
+      color: var(--accent);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      margin: 0 0 12px;
+      line-height: 1.1;
+    }
+
+    .hero p { color: var(--muted); font-size: 1.02rem; }
+
+    .hero-actions {
+      margin-top: 20px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: none;
+      padding: 12px 16px;
+      border-radius: 999px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: linear-gradient(90deg, var(--accent), #ff9f43); color: white; }
+    .btn-secondary { background: #fff3e6; color: var(--accent); }
+
+    .hero-side {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .stats-card {
+      padding: 18px 20px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .stat strong { display: block; font-size: 1.2rem; color: var(--accent); }
+    .stat span { color: var(--muted); font-size: 0.84rem; }
+
+    main { padding: 12px 0 38px; }
+
+    .section {
+      margin-top: 24px;
+      padding: 24px;
+    }
+
+    .section-title { margin: 0 0 8px; font-size: 1.25rem; }
+    .section-subtitle { margin: 0 0 18px; color: var(--muted); }
+
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .event-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .event-card h3 { margin: 0 0 6px; }
+    .event-card p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 20px;
+    }
+
+    form { display: grid; gap: 12px; }
+    .field { display: flex; flex-direction: column; gap: 6px; }
+
+    label { font-size: 0.95rem; color: #5a3a22; }
+    input, select, textarea {
+      width: 100%;
+      padding: 12px 13px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #fffdf9;
+      color: var(--text);
+      outline: none;
+    }
+
+    textarea { resize: vertical; min-height: 94px; }
+
+    .inline { display: flex; align-items: center; gap: 8px; color: var(--muted); }
+    .inline input { width: auto; }
+
+    .message {
+      padding: 12px 14px;
+      border-radius: 12px;
+      display: none;
+      margin-top: 4px;
+    }
+
+    .message.success { background: rgba(255,122,0,0.12); color: #8a3d00; border: 1px solid rgba(255,122,0,0.25); }
+    .message.error { background: rgba(255, 122, 0, 0.16); color: #a34a00; border: 1px solid rgba(255, 122, 0, 0.25); }
+
+    .preview {
+      background: linear-gradient(145deg, #fff6eb, #ffe1bf);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 18px;
+      min-height: 100%;
+    }
+
+    .preview ul { padding-left: 18px; color: var(--muted); }
+    .mini-list { list-style: none; padding: 0; margin: 10px 0 0; }
+    .mini-list li {
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    footer {
+      padding: 20px 0 40px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .hero, .form-grid, .events-grid { grid-template-columns: 1fr; }
+      .hero-side { order: -1; }
+    }
+
+    @media (max-width: 600px) {
+      .nav { border-radius: 18px; flex-direction: column; gap: 8px; }
+      .stats-grid { grid-template-columns: 1fr; }
+      .hero-card, .section { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="container">
+    <nav class="nav">
+      <div class="brand">PRAVAH 2026</div>
+      <div>Student Registration Portal</div>
+    </nav>
+  </header>
+
+  <section class="container hero">
+    <div class="hero-card">
+      <span class="eyebrow">Campus Carnival • 10 July 2026 to 12 July 2026</span>
+      <h1>Register for the biggest student fest of the year.</h1>
+      <p>Join vibrant cultural performances, technical showcases, music nights, dance battles, and unforgettable memories at Pravah 2026.</p>
+      <div class="hero-actions">
+        <a href="#register" class="btn btn-primary">Register Now</a>
+        <a href="#events" class="btn btn-secondary">Explore Events</a>
+      </div>
+    </div>
+
+    <div class="hero-side">
+      <div class="stats-card">
+        <strong>Fest Snapshot</strong>
+        <div class="stats-grid">
+          <div class="stat"><strong id="count-registered">0</strong><span>Registered</span></div>
+          <div class="stat"><strong>20+</strong><span>Activities</span></div>
+          <div class="stat"><strong>3</strong><span>Days of Fun</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="container">
+    <section id="events" class="panel section">
+      <h2 class="section-title">Featured Events</h2>
+      <p class="section-subtitle">Pick your passion and shine on stage.</p>
+      <div class="events-grid">
+        <div class="event-card">
+          <h3>Dance Battle</h3>
+          <p>Beat the floor with energy, rhythm, and crowd-winning choreography.</p>
+        </div>
+        <div class="event-card">
+          <h3>Tech Hack Arena</h3>
+          <p>Build, pitch, and innovate with your dream team in a fast-paced challenge.</p>
+        </div>
+        <div class="event-card">
+          <h3>Music Night</h3>
+          <p>Open mic, band performances, and live vocals under the evening sky.</p>
+        </div>
+        <div class="event-card">
+          <h3>Mysterious Games</h3>
+          <p>“Mystery Games” is an exciting college event where logic, suspense, and fun come together.</p>
+        </div>
+        <div class="event-card">
+          <h3>Quiz Competition</h3>
+          <p>General knowledge, tech ya movies based rapid-fire quiz.</p>
+        </div>
+        <div class="event-card">
+          <h3>Meme War</h3>
+          <p>Best memes banane ka contest — social media friendly event.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="register" class="panel section">
+      <div class="form-grid">
+        <div>
+          <h2 class="section-title">Student Registration Form</h2>
+          <p class="section-subtitle">Fill in your details to reserve your spot at Pravah 2026.</p>
+          <form id="registrationForm">
+            <div class="field">
+              <label for="name">Full Name</label>
+              <input id="name" name="name" placeholder="Enter your name" required />
+            </div>
+            <div class="field">
+              <label for="email">Email Address</label>
+              <input id="email" name="email" type="email" placeholder="Enter your email" required />
+            </div>
+            <div class="field">
+              <label for="college">College / University</label>
+              <input id="college" name="college" placeholder="Your college name" required />
+            </div>
+            <div class="field">
+              <label for="phone">Phone Number</label>
+              <input id="phone" name="phone" placeholder="Your contact number" required />
+            </div>
+            <div class="field">
+              <label for="department">Department</label>
+              <input id="department" name="department" placeholder="e.g. Computer Science" required />
+            </div>
+            <div class="field">
+              <label for="year">Academic Year</label>
+              <select id="year" name="year" required>
+                <option value="">Select year</option>
+                <option>1st Year</option>
+                <option>2nd Year</option>
+                <option>3rd Year</option>
+                <option>4th Year</option>
+                <option>PG</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="event">Preferred Event</label>
+              <select id="event" name="event" required>
+                <option value="">Choose an event</option>
+                <option>Dance Battle</option>
+                <option>Tech Hack Arena</option>
+                <option>Music Night</option>
+                <option>Debate Showdown</option>
+                <option>Gaming Arena</option>
+                <option>Mysterious Games</option>
+                <option>Quiz Competition</option>
+                <option>Meme War</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="notes">Special Notes</label>
+              <textarea id="notes" name="notes" placeholder="Tell us anything we should know"></textarea>
+            </div>
+            <div class="inline">
+              <input id="agree" name="agree" type="checkbox" required />
+              <label for="agree">I agree to participate and follow the fest guidelines.</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Registration</button>
+            <div id="message" class="message"></div>
+          </form>
+        </div>
+
+        <aside class="preview">
+          <h3>Live Preview</h3>
+          <p id="previewText">Fill the form to see a quick summary of your registration.</p>
+          <ul>
+            <li><strong>Name:</strong> <span id="previewName">—</span></li>
+            <li><strong>College:</strong> <span id="previewCollege">—</span></li>
+            <li><strong>Event:</strong> <span id="previewEvent">—</span></li>
+            <li><strong>Year:</strong> <span id="previewYear">—</span></li>
+          </ul>
+          <button type="button" id="downloadWordBtn" class="btn btn-secondary" style="margin-top: 14px;">Download Word Table</button>
+          <h3 style="margin-top: 18px;">Recent Registrations</h3>
+          <ul id="registrationsList" class="mini-list"></ul>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container">
+    © 2026 Pravah College Fest • Crafted for a smooth student registration experience.
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script>
+    $(function () {
+      const storageKey = 'pravah2026Registrations';
+      let registrations = JSON.parse(localStorage.getItem(storageKey) || '[]');
+
+      function renderRegistrations() {
+        $('#count-registered').text(registrations.length);
+        const list = $('#registrationsList');
+        list.empty();
+
+        if (!registrations.length) {
+          list.append('<li>No registrations yet. Be the first!</li>');
+          return;
+        }
+
+        registrations.slice(-5).reverse().each(function (_, student) {
+          list.append(`<li>${student.name} • ${student.event}</li>`);
+        });
+      }
+
+      function updatePreview() {
+        $('#previewName').text($('#name').val() || '—');
+        $('#previewCollege').text($('#college').val() || '—');
+        $('#previewEvent').text($('#event').val() || '—');
+        $('#previewYear').text($('#year').val() || '—');
+        $('#previewText').text($('#name').val() ? `Ready to join ${$('#event').val() || 'your chosen event'}!` : 'Fill the form to see a quick summary of your registration.');
+      }
+
+      function exportToWord() {
+        const rows = registrations.map((student, index) => `
+          <tr>
+            <td>${index + 1}</td>
+            <td>${student.name}</td>
+            <td>${student.email}</td>
+            <td>${student.college}</td>
+            <td>${student.phone}</td>
+            <td>${student.department}</td>
+            <td>${student.year}</td>
+            <td>${student.event}</td>
+          </tr>`).join('');
+
+        const content = `
+          <!DOCTYPE html>
+          <html>
+            <head>
+              <meta charset="utf-8" />
+              <title>Pravah 2026 Registration Report</title>
+              <style>
+                body { font-family: Arial, sans-serif; }
+                table { border-collapse: collapse; width: 100%; }
+                th, td { border: 1px solid #000; padding: 6px; text-align: left; }
+                th { background: #f2f2f2; }
+              </style>
+            </head>
+            <body>
+              <h2>Pravah 2026 Registration Report</h2>
+              <table>
+                <tr>
+                  <th>S. No.</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>College</th>
+                  <th>Phone</th>
+                  <th>Department</th>
+                  <th>Year</th>
+                  <th>Event</th>
+                </tr>
+                ${rows}
+              </table>
+            </body>
+          </html>`;
+
+        const blob = new Blob(['\ufeff', content], { type: 'application/msword' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'pravah_2026_registrations.doc';
+        link.click();
+        URL.revokeObjectURL(url);
+      }
+
+      $('#registrationForm input, #registrationForm select, #registrationForm textarea').on('input change', updatePreview);
+      $('#downloadWordBtn').on('click', exportToWord);
+
+      $('#registrationForm').on('submit', function (e) {
+        e.preventDefault();
+
+        const name = $('#name').val().trim();
+        const email = $('#email').val().trim();
+        const college = $('#college').val().trim();
+        const phone = $('#phone').val().trim();
+        const department = $('#department').val().trim();
+        const year = $('#year').val();
+        const event = $('#event').val();
+        const agree = $('#agree').is(':checked');
+
+        if (!name || !email || !college || !phone || !department || !year || !event || !agree) {
+          $('#message').removeClass('success').addClass('error').text('Please complete all required fields and accept the guidelines.').fadeIn();
+          return;
+        }
+
+        const student = { name, email, college, phone, department, year, event };
+        registrations.push(student);
+        localStorage.setItem(storageKey, JSON.stringify(registrations));
+        renderRegistrations();
+        exportToWord();
+
+        $('#registrationForm')[0].reset();
+        updatePreview();
+        $('#message').removeClass('error').addClass('success').text(`Registration successful, ${name}! Your spot for ${event} is confirmed.`).fadeIn();
+      });
+
+      renderRegistrations();
+      updatePreview();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create an Account | Registration Form</title>
+    <!-- Premium Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Theme Selector -->
+<button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme">
+    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m12.728 12.728l.707.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+    </svg>
+    <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+    </svg>
+</button>
+
+<div class="container">
+    <div class="form-card">
+        <div class="form-header">
+            <h2>Create an Account</h2>
+            <p class="subtitle">Join our platform and start your journey today</p>
+        </div>
+
+        <form id="registerForm" action="register.php" method="POST" novalidate>
+
+            <div class="form-group">
+                <label for="fullname">Full Name</label>
+                <div class="input-wrapper">
+                    <input type="text" id="fullname" name="fullname" placeholder="John Doe">
+                </div>
+                <span class="error" id="fullnameError"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <div class="input-wrapper">
+                    <input type="email" id="email" name="email" placeholder="johndoe@example.com">
+                </div>
+                <span class="error" id="emailError"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <div class="input-wrapper">
+                    <input type="text" id="username" name="username" placeholder="johndoe123">
+                </div>
+                <span class="error" id="usernameError"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="input-wrapper">
+                    <input type="password" id="password" name="password" placeholder="••••••••">
+                </div>
+                <!-- Password Strength Meter -->
+                <div class="password-strength-container">
+                    <div class="strength-bar"><div class="strength-bar-fill" id="strengthBarFill"></div></div>
+                    <span class="strength-text" id="strengthText">Weak</span>
+                </div>
+                <span class="error" id="passwordError"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <div class="input-wrapper">
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="••••••••">
+                </div>
+                <span class="error" id="confirmPasswordError"></span>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" id="submitBtn">
+                    <span class="btn-text">Register</span>
+                    <span class="btn-spinner"></span>
+                </button>
+            </div>
+
+            <p id="formMessage"></p>
+
+        </form>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
